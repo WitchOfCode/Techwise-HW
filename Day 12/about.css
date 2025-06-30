@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #222;
+  background-color: #fafafa;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 1em;
+}
+
+button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  gap: 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5em;
+  transition: background 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #333;
+  border-radius: 4px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+#copyright {
+  font-size: 10px;
+}
+
+.disappearing {
+  display: block;
+}
+
+.mobileFeature {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .disappearing {
+    display: none;
+  }
+
+  .mobileFeature {
+    display: block;
+  }
+}
+
+.rules-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+}
