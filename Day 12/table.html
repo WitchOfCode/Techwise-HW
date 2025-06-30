@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blackjack Betting Interface</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 2em;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      margin: 20px 0;
+    }
+
+    #betting, #playersActions {
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      max-width: 400px;
+      margin-bottom: 1.5em;
+    }
+
+    #betting span {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    label {
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+
+    input[type=number] {
+      width: 100%;
+      padding: 0.4em;
+      font-size: 1em;
+      border-radius: 4px;
+      border: 1px solid #999;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 1em;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #217571;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Blackjack Betting Interface</h1>
+
+  <!-- Betting Interface -->
+  <section id="betting" style="display:none;">
+    <span>Your bankroll: $<span id="bankrollDisplay"></span></span>
+    <label for="users-wager">Enter your wager ($):</label>
+    <input type="number" id="users-wager" min="1" step="1" />
+    <button onclick="makeWager()">Bet</button>
+  </section>
+
+  <!-- Player Actions -->
+  <section id="playersActions">
+    <button onclick="alert('You chose HIT!')">Hit</button>
+    <button onclick="alert('You chose STAND!')">Stand</button>
+  </section>
+
+  <!-- Controls to test -->
+  <button onclick="timeToBet()">Place a Bet</button>
+
+  <script>
+    // Bankroll initialized to 2022 (luck year)
+    let playerBankroll = 2022;
+
+    function getBankroll() {
+      return playerBankroll;
+    }
+
+    function setBankroll(newBalance) {
+      if (Number.isInteger(newBalance) && newBalance >= 0) {
+        playerBankroll = newBalance;
+      } else {
+        console.error("Bankroll must be a non-negative integer.");
+      }
+    }
+
+    function timeToBet() {
+      const playersActions = document.getElementById("playersActions");
+      const betting = document.getElementById("betting");
+      const bankrollDisplay = document.getElementById("bankrollDisplay");
+
+      // Hide player actions
+      playersActions.classList.add("hidden");
+
+      // Show betting section and update bankroll display
+      betting.style.display = "block";
+      bankrollDisplay.textContent = getBankroll();
+
+      // Clear wager input
+      document.getElementById("users-wager").value = "";
+    }
+
+    function makeWager() {
+      const wagerInput = document.getElementById("users-wager");
+      const wagerAmount = parseInt(wagerInput.value, 10);
+
+      if (
+        Number.isInteger(wagerAmount) &&
+        wagerAmount > 0 &&
+        wagerAmount <= getBankroll()
+      ) {
+        console.log("User wagered:", wagerAmount);
+
+        // Optionally update bankroll (not required, but realistic)
+        setBankroll(getBankroll() - wagerAmount);
+
+        // Go to playing phase
+        timeToPlay();
+      } else {
+        alert(
+          "Please enter a valid wager amount (positive integer, no more than your bankroll)."
+        );
+      }
+    }
+
+    function timeToPlay() {
+      const playersActions = document.getElementById("playersActions");
+      const betting = document.getElementById("betting");
+
+      playersActions.classList.remove("hidden");
+      betting.style.display = "none";
+    }
+  </script>
+</body>
+</html>
